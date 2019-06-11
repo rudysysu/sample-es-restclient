@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="SERVICE_NAME" value="service" />
+    <property name="LOG_PATTERN" value="%date %level [%thread] %logger [%file:%line] %msg%n" />
+    <property name="MAX_FILE_SIZE" value="100MB" />
+    <property name="MAX_HISTORY" value="30" />
+    <property name="TOTAL_SIZE_CAP" value="10GB" />
+
+    <appender name="R_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+        <file>${LOG_PATH}/${SERVICE_NAME}_debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}/${SERVICE_NAME}_debug-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="R_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+        <file>${LOG_PATH}/${SERVICE_NAME}_info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}/${SERVICE_NAME}_info-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="R_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+        <file>${LOG_PATH}/${SERVICE_NAME}_warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}/${SERVICE_NAME}_warn-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="R_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+        <file>${LOG_PATH}/${SERVICE_NAME}_error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}/${SERVICE_NAME}_error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="R_DEBUG" />
+        <appender-ref ref="R_INFO" />
+        <appender-ref ref="R_WARN" />
+        <appender-ref ref="R_ERROR" />
+    </root>
+</configuration>
